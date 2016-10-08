@@ -31,11 +31,18 @@ style: """
   .containerPort
     display: block
 
+  .icons
+    margin-left: 5px
+    margin-right: 5px
+
 """
 
 refreshFrequency: '5s'
 
 render: -> """
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
   <div id="wrapper">
     <div id="containers">
       <div id="names"></div>
@@ -49,12 +56,12 @@ update: (output, domEl) ->
   containers = JSON.parse("[" + output.slice(0, -2) + "]")
   containersName = (
     """
-        <span class="containerName">#{container.name}</span>
+        <span class="containerName">#{container.name}
     """ for container in containers)
   containersPort = (
     """
         <span class="containerPort">
-          #{container.port.replace("/tcp", "")}
+          #{container.port.replace("/tcp", "").replace("->", "<span><i class='icon-shuffle icons'></i></span>")}
         </span>
     """ for container in containers)
 
